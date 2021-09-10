@@ -1,14 +1,14 @@
 {
-    "name": "Egui Template PWA",
-    "short_name": "egui-template-pwa",
+    "name": "FerrisChat",
+    "short_name": "ferrischat",
     "icons": [{
-      "src": "./icon-256.png",
-        "sizes": "256x256",
+      "src": "./icon-500.png",
+        "sizes": "500x500",
         "type": "image/png"
       }],
     "lang": "en-US",
     "start_url": "./index.html",
     "display": "standalone",
-    "background_color": "white",
-    "theme_color": "white"
+    "background_color": "#000000",
+    "theme_color": "#F17036"
   }
