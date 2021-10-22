@@ -132,11 +132,19 @@
     <script src="ferrischat_client.js"></script>
 
     <script>
+        function wasmLoadError(details) {
+            alert("An exception happened while trying to load the app. If you're not running Firefox," +
+                    " you will not get any support for this issue. If you are running Firefox, you can" +
+                    " view the exact error in console (ctrl+shift+i) and report it to our dev team over" +
+                    " on GitHub.\nDetails: " + details);
+            console.error(details)
+        }
+
         // We'll defer our execution until the wasm is ready to go.
         // Here we tell bindgen the path to the wasm file so it can start
         // initialization and return to us a promise when it's done.
         wasm_bindgen("./ferrischat_client_bg.wasm")
-            .then(on_wasm_loaded)["catch"](console.error);
+            .then(on_wasm_loaded)["catch"](wasmLoadError);
 
         function on_wasm_loaded() {
             // This call installs a bunch of callbacks and then returns.
