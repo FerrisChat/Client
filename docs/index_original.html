@@ -69,11 +69,51 @@
     <p>Loading client...<br><br>
     If this takes longer than 15 seconds:<br>
     * Check your internet connection<br>
-    * Switch to Firefox if you aren't already running it (Chrome is unsupported!)<br>
-    * Try using the native app<br></p>
+    <span id="browser_detect"></span>
+    * Try using the native app<br>
+    </p>
+    <noscript><p>
+        * <b>Enable JavaScript!</b> We only use simple JS to load Rust code that runs fast.
+        An analytics script is also installed, but you can deny sending data by enabling Do Not Track.
+    </p></noscript>
 
     <!-- The WASM code will resize this canvas to cover the entire screen -->
-    <canvas id="the_canvas_id"></canvas>
+    <canvas id="app_canvas"></canvas>
+
+    <script>
+        // true means Firefox: https://stackoverflow.com/a/34918134
+        // this returns true in Firefox 92, and false in Chromium 94 as of Oct 2021
+        let isFirefox = typeof InstallTrigger !== 'undefined';
+        if (!isFirefox) {
+            // borrowed from StackOverflow: https://stackoverflow.com/a/2401861
+            navigator.saysWho = (() => {
+                const { userAgent } = navigator
+                let match = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || []
+                let temp
+                if (/trident/i.test(match[1])) {
+                    temp = /\brv[ :]+(\d+)/g.exec(userAgent) || []
+                    return `IE ${temp[1] || ''}`
+                }
+                if (match[1] === 'Chrome') {
+                    temp = userAgent.match(/\b(OPR|Edge)\/(\d+)/)
+                    if (temp !== null) {
+                        return temp.slice(1).join(' ').replace('OPR', 'Opera')
+                    }
+                    temp = userAgent.match(/\b(Edg)\/(\d+)/)
+                    if (temp !== null) {
+                        return temp.slice(1).join(' ').replace('Edg', 'Edge (Chromium)')
+                    }
+                }
+                match = match[2] ? [ match[1], match[2] ] : [ navigator.appName, navigator.appVersion, '-?' ]
+                temp = userAgent.match(/version\/(\d+)/i)
+                if (temp !== null) {
+                    match.splice(1, 1, temp[1])
+                }
+                return match.join(' ')
+            })();
+            document.getElementById("browser_detect").innerHTML = "* Switch to Firefox 92 or higher (" + navigator.saysWho + " detected)<br>"
+        }
+    </script>
 
     <script>
         // The `--no-modules`-generated JS from `wasm-bindgen` attempts to use
@@ -100,7 +140,7 @@
 
         function on_wasm_loaded() {
             // This call installs a bunch of callbacks and then returns.
-            wasm_bindgen.start("the_canvas_id");
+            wasm_bindgen.start("app_canvas");
         }
     </script>
     <script async defer src="https://sa.ferris.chat/latest.js"></script>
