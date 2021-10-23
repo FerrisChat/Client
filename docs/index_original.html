@@ -114,7 +114,11 @@
                 }
                 return match.join(' ')
             })();
-            document.getElementById("browser_detect").innerHTML = "* Switch to Firefox 92 or higher (" + navigator.saysWho + " detected)<br>"
+            document.getElementById("browser_detect").innerHTML = "* Switch to the latest version of Firefox (" + navigator.saysWho + " detected)<br>"
+            alert("We notice you're running an unsupported browser (" + navigator.saysWho + " detected).\n" +
+                    "Please note the latest version of Firefox is the only supported browser. If you experience issues/bugs, " +
+                    "you will not receive any support for them unless you are using Firefox. You can still use the app, " +
+                    "as long as you are aware of the possible issues.");
         }
     </script>
 
