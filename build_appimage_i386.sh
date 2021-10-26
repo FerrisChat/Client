@@ -1,23 +1,22 @@
 #!/bin/bash
 set -eu
 
-# ./setup_appimage.sh # <- call this first!
+# ./setup_appimage_i386.sh # <- call this first!
 
-# build binary
-echo "Building Rust binary..."
-RUSTFLAGS="--emit=asm" cargo build --target i686-unknown-linux-gnu --release
+echo "!! DO NOT MODIFY Cargo.toml WHILE RUNNING !!"
+echo "Your changes MAY be dropped!"
 
-# remove existing binary if exists
-if [ -e AppDir_i386/usr/bin/ferrischat_client ]; then
-  rm AppDir_i386/usr/bin/ferrischat_client
-fi
+printf "\n[package.metadata.appimage]\nauto_link = true" >> Cargo.toml
+echo "Building AppImage (stage 1/2)"
+RUSTFLAGS="--emit=asm" cargo appimage -- --target i686-unknown-linux-gnu
 
-# invoke linuxdeploy to set up the AppDir
-echo "Setting up the AppDir..."
-linuxdeploy -e target/i686-unknown-linux-gnu/release/ferrischat_client --appdir AppDir_i386
+echo "Cleaning up libs"
+sed -i '/\[package.metadata.appimage\]/d' Cargo.toml
+sed -i '/auto_link = true/d' Cargo.toml
 
-# invoke appimagetool to make the actual AppImage
-echo "Making the AppImage..."
-appimagetool AppDir_i386/
+rm -f libs/libc.* libs/libpthread.* libs/libgcc_s.* libs/libdl.* libs/ld-linux* libs/libbsd.* libs/libm.* libs/librt.*
+
+echo "Building AppImage (stage 2/2: much faster)"
+RUSTFLAGS="--emit=asm" cargo appimage -- --target i686-unknown-linux-gnu
 
 echo "AppImage built!"
