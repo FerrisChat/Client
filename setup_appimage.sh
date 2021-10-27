@@ -1,12 +1,14 @@
 #!/bin/bash
 
 if [[ "$EUID" -ne 0 ]]; then
-  echo "Need root to install required binaries."
+  echo "Need root to install required libraries."
   sudo -v || exit
 fi
 
+HOST_TYPE=$(uname -m)  # uname -i sometimes returns unknown
+
 echo "Installing appimagetool to /usr/bin"
-wget -O /tmp/appimagetool https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage
+wget -O /tmp/appimagetool "https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-$HOST_TYPE.AppImage"
 chmod +x /tmp/appimagetool
 if [[ "$EUID" -eq 0 ]]; then
   mv /tmp/appimagetool /usr/bin/
@@ -14,20 +16,10 @@ else
   sudo mv /tmp/appimagetool /usr/bin/
 fi
 
-echo "Installing linuxdeploy to /usr/bin"
-wget -O /tmp/linuxdeploy https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
-chmod +x /tmp/linuxdeploy
-if [[ "$EUID" -eq 0 ]]; then
-  mv /tmp/linuxdeploy /usr/bin
-else
-  sudo mv /tmp/linuxdeploy /usr/bin
-fi
-
 echo "Installing required libraries"
-sudo apt install -y \
-  libxcb1-dev libxcb1-dev:i386 \
-  libxcb-render0-dev libxcb-render0-dev:i386 \
-  libxcb-shape0-dev libxcb-shape0-dev:i386 \
-  libxcb-xfixes0-dev libxcb-xfixes0-dev:i386
+sudo apt install -y libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev
 
-echo "Done. To uninstall simply remove the binaries located in /usr/bin."
+echo "Installing required cargo package"
+cargo install cargo-appimage
+
+echo "Done."

@@ -8,9 +8,8 @@ if [ -e libs ]; then
   rm -r libs/
 fi
 
-if [[ $(uname -m) != "x86_64" ]]; then
-  echo "64-bit Linux builds can only be built natively!"
-  # otherwise the compiler still tries to link with native 64 bit libs
+if [[ $(uname -m) != "armv7l" ]]; then
+  echo "32-bit ARM Linux builds can only be built natively!"
   exit 1
 fi
 
@@ -19,7 +18,7 @@ echo "Your changes MAY be dropped!"
 
 printf "\n[package.metadata.appimage]\nauto_link = true" >> Cargo.toml
 echo "Building AppImage (stage 1/2)"
-RUSTFLAGS="--emit=asm" cargo appimage -- --target x86_64-unknown-linux-gnu
+RUSTFLAGS="--emit=asm" cargo appimage -- --target armv7-unknown-linux-gnueabihf
 
 echo "Cleaning up libs"
 sed -i '/\[package.metadata.appimage\]/d' Cargo.toml
@@ -28,6 +27,6 @@ sed -i '/auto_link = true/d' Cargo.toml
 rm -f libs/libc.* libs/libpthread.* libs/libgcc_s.* libs/libdl.* libs/ld-linux* libs/libbsd.* libs/libm.* libs/librt.*
 
 echo "Building AppImage (stage 2/2: much faster)"
-RUSTFLAGS="--emit=asm" cargo appimage -- --target x86_64-unknown-linux-gnu
+RUSTFLAGS="--emit=asm" cargo appimage -- --target armv7-unknown-linux-gnueabihf
 
 echo "AppImage built!"

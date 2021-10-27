@@ -1,7 +1,18 @@
 #!/bin/bash
 set -eu
 
-# ./setup_appimage_i386.sh # <- call this first!
+# ./setup_appimage.sh # <- call this first!
+
+# remove existing libs if they exist
+if [ -e libs ]; then
+  rm -r libs/
+fi
+
+if [[ $(uname -i) != "i386" ]]; then
+  echo "32-bit Linux builds can only be built natively!"
+  # otherwise the compiler still tries to link with native 64 bit libs
+  exit 1
+fi
 
 echo "!! DO NOT MODIFY Cargo.toml WHILE RUNNING !!"
 echo "Your changes MAY be dropped!"
