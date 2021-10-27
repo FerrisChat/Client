@@ -1,3 +1,7 @@
 /target
 
 .idea/
+
+appimage-builder-cache/
+
+libs/
