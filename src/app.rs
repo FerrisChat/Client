@@ -10,11 +10,10 @@ pub struct FerrisApp {
 impl Default for FerrisApp {
     fn default() -> Self {
         Self {
-            _version: String::from("v0.1.0-alpha")
+            _version: String::from("v0.1.0-alpha"),
         }
     }
 }
-
 
 impl epi::App for FerrisApp {
     fn name(&self) -> &str {
