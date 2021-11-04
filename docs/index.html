@@ -1,2 +1,196 @@
-<!--non-minified version available at /index_original.html-->
-<!DOCTYPE html><html><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><head><title>FerrisChat</title><style>html {touch-action: manipulation;}  body {background: #000;}  html, body {overflow: hidden;margin: 0 !important;padding: 0 !important;}  canvas {margin-right: auto;margin-left: auto;display: block;position: absolute;left: 50%;transform: translate(-50%, 0%);top: 0%;z-index: 2;}  p {margin-right: auto;margin-left: auto;display: block;position: absolute;left: 50%;transform: translate(-50%, 0%);z-index: 1;color: #FFF;}</style><link rel="manifest" href="./manifest.json"><script>window.onload = () => {'use strict';if ('serviceWorker' in navigator) {navigator.serviceWorker.register('./sw.js');}}</script><meta name="theme-color" content="#F17036"><link rel="apple-touch-icon" href="./icon-192.png"></head><body><p>Loading client...<br><br>If this takes longer than 15 seconds:<br>* Check your internet connection (this can take up to 90 seconds on 2G connections due to a 1MB file being downloaded)<br><span id="browser_detect"></span>* Try using the native app<br></p><noscript><p>* <b>Enable JavaScript!</b> We only use simple JS to load Rust code that runs fast. An analytics script is also installed, but you can deny sending data by enabling Do Not Track.</p></noscript><canvas id="app_canvas"></canvas><script>let isFirefox = typeof InstallTrigger !== 'undefined';if (!isFirefox) {navigator.saysWho = (() => {const ua = navigator.userAgent;let b = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];let c;if (/trident/i.test(b[1])) {c = /\brv[ :]+(\d+)/g.exec(ua) || [];return `IE ${c[1] || ''}`;}if (b[1] === 'Chrome') {c = ua.match(/\b(OPR|Edge)\/(\d+)/);if (c !== null) {return c.slice(1).join(' ').replace('OPR', 'Opera');}c = ua.match(/\b(Edg)\/(\d+)/);if (c !== null) {return c.slice(1).join(' ').replace('Edg', 'Edge (Chromium)');}}b = b[2] ? [ b[1], b[2] ] : [ navigator.appName, navigator.appVersion, '-?' ];c = ua.match(/version\/(\d+)/i);if (c !== null) {b.splice(1, 1, c[1]);}return b.join(' ')})();document.getElementById("browser_detect").innerHTML = "* Switch to the latest version of Firefox (" + navigator.saysWho + " detected) <a href=\"https://www.firefox.best/\">https://www.firefox.best/</a><br>";alert("We notice you're running an unsupported browser (" + navigator.saysWho + "detected).\nPlease note the latest version of Firefox is the only supported browser. If you experience issues/bugs, you will not receive any support for them unless you are using Firefox. You can still use the app, as long as are aware of the possible issues.");}</script><script src="ferrischat_client.min.js"></script><script>function wasmLoadError(details) {alert("An exception happened while trying to load the app. If you're not running Firefox, you will not get any support for this issue. If you are running Firefox, you can view the exact error in console (ctrl+shift+i).");console.error(details)}wasm_bindgen("./ferrischat_client_bg.wasm").then(on_wasm_loaded)["catch"](wasmLoadError);function on_wasm_loaded() {wasm_bindgen.start("app_canvas");}</script><script async defer src="https://sa.ferris.chat/latest.js"></script><noscript><img src="https://sa.ferris.chat/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript></body></html>
+<!DOCTYPE html>
+<html lang="en" style="font-family: Arial, SansSerif">
+<head>
+    <meta charset="UTF-8">
+    <title>FerrisChat Client Downloads</title>
+    <style>
+        td, th {
+            padding: 5px;
+            border-bottom: dimgray solid 1px;
+        }
+    </style>
+</head>
+<body>
+<h1>FerrisChat Client Downloads</h1>
+
+<h2>Quick Links</h2>
+<a href="#stable">Stable (recommended)</a><br>
+<a href="#beta">Beta (new features earlier, but buggier)</a><br>
+<a href="#alpha">Alpha (new features earliest, but very buggy)</a><br><br>
+
+<h2 id="stable">Stable</h2>
+<table>
+    <tr>
+        <th>OS</th>
+        <th>Download</th>
+        <th>GPG signature</th>
+        <th>SHA256 sum</th>
+    </tr>
+    <tr>
+        <td>Linux x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux i386</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux armhf</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux aarch64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Windows x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.exe">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.exe.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.exe.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Windows i386</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.exe">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.exe.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.exe.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>MacOS x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.app">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.app.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.app.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>MacOS aarch64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.app">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.app.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.app.shasum">Download</a></td>
+    </tr>
+</table><br>
+
+<h2 id="beta">Beta</h2>
+<table>
+    <tr>
+        <th>OS</th>
+        <th>Download</th>
+        <th>GPG signature</th>
+        <th>SHA256 sum</th>
+    </tr>
+    <tr>
+        <td>Linux x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux i386</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.beta.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.beta.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.beta.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux armhf</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.beta.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.beta.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.beta.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux aarch64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.beta.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.beta.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.beta.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Windows x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.exe">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.exe.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.exe.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Windows i386</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.beta.exe">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.beta.exe.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.beta.exe.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>MacOS x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.app">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.app.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.beta.app.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>MacOS aarch64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.beta.app">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.beta.app.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.beta.app.shasum">Download</a></td>
+    </tr>
+</table><br>
+
+
+<h2 id="alpha">Alpha</h2>
+<table>
+    <tr>
+        <th>OS</th>
+        <th>Download</th>
+        <th>GPG signature</th>
+        <th>SHA256 sum</th>
+    </tr>
+    <tr>
+        <td>Linux x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux i386</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.alpha.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.alpha.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.alpha.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux armhf</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.alpha.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.alpha.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-armhf.alpha.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Linux aarch64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.alpha.AppImage">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.alpha.AppImage.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.alpha.AppImage.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Windows x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.exe">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.exe.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.exe.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>Windows i386</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.alpha.exe">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.alpha.exe.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-i386.alpha.exe.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>MacOS x86_64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.app">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.app.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-x86_64.alpha.app.shasum">Download</a></td>
+    </tr>
+    <tr>
+        <td>MacOS aarch64</td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.alpha.app">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.alpha.app.sig">Download</a></td>
+        <td><a href="https://download.ferris.chat/FerrisChat_Client-aarch64.alpha.app.shasum">Download</a></td>
+    </tr>
+</table>
+</body>
+</html>
