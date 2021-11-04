@@ -5,7 +5,7 @@
 // When compiling natively:
 #[cfg(not(target_arch = "wasm32"))]
 fn main() {
-    let app = ferrischat_client::TemplateApp::default();
+    let app = ferrischat_client::FerrisApp::default();
     let native_options = eframe::NativeOptions::default();
     eframe::run_native(Box::new(app), native_options);
 }
